@@ -5,11 +5,8 @@
  */
 package lesson2;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.Reader;
-import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -106,14 +103,26 @@ public class StudentMerits {
 		double totalAverageMerit = totalMerit/numStudents;
 		
 		System.out.println("average student mark: " + (double)Math.round(totalAverageMerit * 10) / 10); 
-		System.out.println("Standard deviation: ");
-		//TODO output to merit order (also print the ranking)
-		//For each student, in each list, print out the number of marks and the average
-		//Each list is preceded by a title
 		
-		//TODO print the number of students, the average of the student averages
-		// and the standard deviation of the student averages
-		//TODO floats must be printed to 1 decimal place.
+		
+		//Calculating the standard deviation
+		//TODO calculate the deviance (sum of each AverageMerit - Median)
+		//     add the squares of the deviances together
+		//     divide by n-1
+		//     square root and round the total to 1 decimal place
+		ArrayList<Double> deviance = new ArrayList<Double>();
+		for (Student s : sortedGroup) {
+			double dev = s.getAverageMerit() - totalAverageMerit;
+			deviance.add(dev);
+		}
+		double total = 0.0;
+		for(double d : deviance) {
+			total += Math.pow(d, 2);
+		}
+		total = total/(sortedGroup.size()-1);
+		double standard = Math.sqrt(total);
+		double roundedStandard = Math.ceil(standard * 10) / 10;
+		System.out.println("Standard deviation: " + roundedStandard);
 	}
 
 }
