@@ -1,6 +1,7 @@
 package lesson2;
 
 import java.util.Comparator;
+/*student class, comparable*/
 
 public class Student implements Comparable<Student> {
 	private String name;
