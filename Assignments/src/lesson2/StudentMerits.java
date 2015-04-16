@@ -11,7 +11,7 @@ import java.util.*;
 
 /**
  * @author Tony
- * The objet of this program is to write a program to process a set of student
+ * The object of this program is to write a program to process a set of student
  * marks by reading them from an input file. The program should write its output
  * to the standard output. Each line of the input file follows this format, a name
  * followed by a mark.
@@ -22,8 +22,7 @@ public class StudentMerits {
 		String fileName = "text.txt";
 		File file = new File(fileName);
 		
-		//TODO write the output to the standard output.
-
+		//TODO TEST write the output to the standard output.
 		System.out.println("File output test");
 		try {
 			Scanner inputStream = new Scanner(file);
@@ -34,26 +33,24 @@ public class StudentMerits {
 		} catch (FileNotFoundException e) {
 			System.out.println("File is not found");
 		}
-		//TODO standard system out console. List in alphabetic order
-		//This maps the name as a key to the marks.
+		//TODO Output in alphabetic order
 		System.out.println();
 		System.out.println("Alpha order");
-/*		HashMap<String, Double> m = new HashMap<String, Double>();
-		HashMap<String, Integer> count = new HashMap<String, Integer>();*/
 		
+		//create a new hashmap with names mapped to student objects.
 		HashMap<String, Student> group = new HashMap<String, Student>();
 		try {
 			Scanner inputStream = new Scanner(file);
 			while (inputStream.hasNextLine()) { //while the stream has next line
-				String name = inputStream.next();   // name is next token
-				double merit = inputStream.nextDouble();  //merit is next token
-				if (!group.keySet().contains(name)) {   //if not in the group 
+				String name = inputStream.next();         // grab name
+				double merit = inputStream.nextDouble();  //grab merit
+				if (!group.keySet().contains(name)) {        //if not in group 
 					Student s = new Student(name, 1, merit); // add new student
 					group.put(name, s);
-				} else {   //already in the group, just increment merit count
+				} else {   //already in the group
 					Student s = group.get(name);
-					s.setNum(s.getNum()+1);  //increment number of merits
-					s.setMerit(s.getMerit()+merit);
+					s.setNum(s.getNum()+1);   //increment number of merits
+					s.setMerit(s.getMerit()+merit);  //add merits
 				}
 			}
 			inputStream.close();
@@ -61,47 +58,46 @@ public class StudentMerits {
 			System.out.println("error");
 		}
 		
-
+		// Creats arraylist of students (to be sorted)
 		ArrayList<Student> sortedGroup = new ArrayList<Student>();
-		
+		// builds the list
 		for(String s : group.keySet()) {
 			sortedGroup.add(group.get(s));
 		}
 		
-		//Sorts by comparator
+		//Sorts by comparator (student name - alphabetically)
 		Collections.sort(sortedGroup, Student.StudentNameComparator);
 		for(Student s: sortedGroup) {
 			System.out.println(s.getName() + " " + s.getNum() + " " + s.getAverageMerit());
 		}
-		
 		System.out.println();
 		
-		//Merit order sorts by merit using CompareTo()
+		//Merit order - rank using collections.sort - CompareTo()
 		System.out.println("Merit order");
-		Collections.sort(sortedGroup);
-		int rank = 1;
-		Student first = sortedGroup.get(0);
-		for (int i = 0; i < sortedGroup.size();i++) {
-			Student s = sortedGroup.get(i);
-			if (s.compareTo(first) == 0) {
-				first = s;
-			} else {
-				rank++;
+		if (sortedGroup.size() > 0) {
+			Collections.sort(sortedGroup);  //sort 
+			int rank = 1;           //initial rank
+			Student first = sortedGroup.get(0);  //uses first student to compare
+			for (int i = 0; i < sortedGroup.size();i++) {
+				Student s = sortedGroup.get(i);
+				if (s.compareTo(first) == 0) {
+					first = s;
+				} else {
+					rank++;    //increment the rank only if they are not equal
+				}
+				System.out.println(rank + " " + s.getName() + " " + s.getNum() + " " + s.getAverageMerit());
 			}
-			System.out.println(rank + " " + s.getName() + " " + s.getNum() + " " + s.getAverageMerit());
 		}
-		
 
-		
 		System.out.println();
-		int numStudents = group.size();
+		int numStudents = group.size();  //number of students
 		System.out.println("Number of students: " + numStudents);
 		double totalMerit = 0;
 		for(Student s : sortedGroup) {
 			totalMerit += s.getAverageMerit();
 		}
-		double totalAverageMerit = totalMerit/numStudents;
-		
+		double totalAverageMerit = totalMerit/numStudents;  //average merit
+		//rounded average merit
 		System.out.println("average student mark: " + (double)Math.round(totalAverageMerit * 10) / 10); 
 		
 		
