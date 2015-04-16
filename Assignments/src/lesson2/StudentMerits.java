@@ -105,8 +105,8 @@ public class StudentMerits {
 		System.out.println("average student mark: " + (double)Math.round(totalAverageMerit * 10) / 10); 
 		
 		
-		//Calculating the standard deviation
-		//TODO calculate the deviance (sum of each AverageMerit - Median)
+		//TODO Calculate the standard deviation
+		//     calculate the deviance (sum of each AverageMerit - Median)
 		//     add the squares of the deviances together
 		//     divide by n-1
 		//     square root and round the total to 1 decimal place
