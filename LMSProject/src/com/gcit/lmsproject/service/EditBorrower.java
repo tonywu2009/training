@@ -9,6 +9,7 @@ import com.gcit.lmsproject.domain.Borrower;
 public class EditBorrower {
 
 	Scanner s;
+	BorrowerDAO dao;
 	
 	public EditBorrower(Scanner s) {
 		this.s = s;
@@ -34,7 +35,9 @@ public class EditBorrower {
 		System.out.println("1) Check out a book");
 		System.out.println("2) Return a book");
 		System.out.println("3) Quit to previous");
-		
-		
+		String response = s.next();
+		if (s == 1) {
+			
+		}
 	}
 }
